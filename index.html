@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enhancing Object Removal in Images Using Text Prompts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Enhancing Object Removal in Images Using Text Prompts</h1>
+    <p><strong>Harsha Rapuru, Hareen Sai Vattikuti</strong></p>
+
+    <h2>Motivation and Problem Statement</h2>
+    <h3>Motivation</h3>
+    <p>Image editing often involves removing unwanted objects like people, animals, watermarks, or timestamps. Traditional methods rely on manual masking, which is tedious and time-consuming — especially for scenes with multiple or complex objects.</p>
+    <p>As AI evolves, there's growing demand for intuitive, natural-language tools that can simplify editing tasks through simple commands like “remove people from background.”</p>
+
+    <h3>Problem Statement</h3>
+    <p>Current image editing tools require users to create detailed masks manually. This process is inefficient and inaccessible for non-experts. Some automated tools exist, but they often lack natural language interfaces.</p>
+
+    <h2>Related Work</h2>
+    <p>We explored <strong>InstructPix2Pix</strong> which enables editing using prompts like:</p>
+    <ul>
+        <li>Remove people</li>
+        <li>Remove dog</li>
+        <li>Remove car</li>
+    </ul>
+    <p><em>Source: https://huggingface.co/spaces/timbrooks/instruct-pix2pix</em></p>
+
+    <h2>Datasets</h2>
+    <ul>
+        <li><strong>Grounding DINO:</strong> Trained on LAION-400M and OpenImages.</li>
+        <li><strong>SAM:</strong> Trained on SA-1B dataset (11M+ images, 1B masks).</li>
+        <li><strong>Stable Diffusion:</strong> Trained on LAION-5B.</li>
+        <li><strong>Custom Dataset:</strong> 1000 training and 100 testing images from Google Street View (urban clutter).</li>
+    </ul>
+
+    <h2>Quantitative Metrics</h2>
+    <ul>
+        <li><strong>SSIM:</strong> Measures structural similarity. Higher is better.</li>
+        <li><strong>IoU:</strong> Evaluates object mask overlap. Higher is better.</li>
+        <li><strong>LPIPS:</strong> Assesses perceptual difference. Lower is better.</li>
+    </ul>
+
+    <h2>Proposed Method</h2>
+    <pre>
+Input Image + Text Prompt
+        ↓
+Object Detection (Grounding DINO)
+        ↓
+Segmentation Mask (SAM)
+        ↓
+Inpainting (Stable Diffusion)
+        ↓
+Final Output
+    </pre>
+
+    <h2>Models</h2>
+    <ul>
+        <li><strong>Grounding DINO:</strong> Text-guided object detection</li>
+        <li><strong>SAM:</strong> Versatile segmentation model</li>
+        <li><strong>Stable Diffusion:</strong> Context-aware inpainting</li>
+        <li><strong>LoRA:</strong> Lightweight fine-tuning</li>
+    </ul>
+
+    <h2>Architectures</h2>
+    <p>(a) Grounding DINO — <em>Insert image here</em></p>
+    <p>(b) SAM — <em>Insert image here</em></p>
+    <p>(c) Stable Diffusion — <em>Insert image here</em></p>
+    <p>(d) LoRA — <em>Insert image here</em></p>
+
+    <h2>Results</h2>
+    <p>(a) Prompt: remove car — <em>Insert image here</em></p>
+    <p>(b) Prompt: remove cars and trashcans — <em>Insert image here</em></p>
+
+    <h2>Negative Results</h2>
+    <p>(a) Prompt: remove cars and trucks — <em>Insert image here</em></p>
+    <p>(b) Prompt: remove car — <em>Insert image here</em></p>
+
+    <h2>Tabular Comparison</h2>
+    <table>
+        <tr><th>Metric</th><th>Current Model</th><th>InstructPix2Pix</th></tr>
+        <tr><td>IoU</td><td>0.7</td><td>0.4</td></tr>
+        <tr><td>SSIM</td><td>0.6</td><td>0.3</td></tr>
+        <tr><td>LPIPS</td><td>0.4</td><td>0.8</td></tr>
+    </table>
+
+    <h2>Limitations</h2>
+    <ul>
+        <li>Hard to reconstruct complex textures and lighting</li>
+        <li>Artifacts when dealing with reflections or occlusions</li>
+        <li>Long processing time for high-resolution images</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>We developed a robust system that automates object removal using natural language. By combining Grounded SAM, Stable Diffusion, and LoRA, we simplified the editing workflow while improving realism and accuracy.</p>
+
+    <h2>Future Work</h2>
+    <ul>
+        <li>Improved multi-object removal</li>
+        <li>Better handling of occlusions and poor lighting</li>
+        <li>Extension to video-based object removal</li>
+    </ul>
+
+    <h2>References</h2>
+    <ol>
+        <li>Brooks et al., <em>InstructPix2Pix</em>, CVPR 2023</li>
+        <li>Kirillov et al., <em>Segment Anything</em>, Meta AI, arXiv:2304.02643</li>
+        <li>Liu et al., <em>Grounding DINO</em>, arXiv:2303.05499</li>
+        <li>Rombach et al., <em>Latent Diffusion Models</em>, CVPR 2022</li>
+    </ol>
+</div>
+</body>
+</html>
